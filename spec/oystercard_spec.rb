@@ -2,6 +2,8 @@ require 'oystercard'
 
 RSpec.describe Oystercard do
 let(:oystercard) {Oystercard.new}
+let(:entry_station) {double("dalston station")}
+let(:exit_station) {double("highgate station")}
 LIMIT = 90
 MINIMUM_FARE = 1
 #Let creates the object where theres subject it calls,
@@ -24,33 +26,11 @@ MINIMUM_FARE = 1
     end
   end
 
-  describe '#deduct' do
-    it 'deducts a fare from the balance' do
-      oystercard.top_up(20)
-      oystercard.deduct(3)
-      expect(oystercard.balance).to eq(17)
+    it 'contains an empty array' do
+      expect(oystercard.all_journeys).to eq([])
     end
-  end
 
-  describe '#in_journey' do
-    it 'is not intially in journey' do
-      expect(oystercard.in_journey).to eq false
-    end
-  end
 
-  describe '#touch_in' do
-    it 'checks if card in a journey' do
-      oystercard.touch_in
-      expect(oystercard.in_journey).to eq true
-    end
-  end
-
-  describe '#touch_out' do
-    it 'check if card is not in a journey' do
-      oystercard.touch_out
-      expect(oystercard.in_journey).to eq false
-    end
-  end
 
   describe '#minimum fare' do
     it 'prevents journey if balance below minimum fare' do
